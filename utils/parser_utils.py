@@ -52,6 +52,7 @@ def get_args():
                         help='Number of classes to sample per set')
     parser.add_argument('--num_samples_per_class', type=int, default=1, help='Number of samples per set to sample')
     parser.add_argument('--name_of_args_json_file', type=str, default="None")
+    parser.add_argument('--cli_args', nargs='+', default=[])
 
     args = parser.parse_args()
     args_dict = vars(args)
@@ -100,7 +101,7 @@ def extract_args_from_json(json_file_path, args_dict):
         summary_dict = json.load(fp=f)
 
     for key in summary_dict.keys():
-        if key in args_dict:
+        if key in args_dict["cli_args"]:
             # I want to be able to override the config
             # from the json with something from the command
             # line
