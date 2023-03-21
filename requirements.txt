@@ -6,3 +6,4 @@ matplotlib
 pydrive
 Pillow
 tqdm
+torchvision
