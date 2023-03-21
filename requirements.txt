@@ -1,9 +1,8 @@
-pytorch
+torch
 opencv-python
 numpy
 scipy
 matplotlib
-pbzip2
 pydrive
 Pillow
 tqdm
