@@ -104,7 +104,7 @@ def extract_args_from_json(json_file_path, args_dict):
             # I want to be able to override the config
             # from the json with something from the command
             # line
-            pass
+            continue
         if "continue_from" not in key and "gpu_to_use" not in key:
             args_dict[key] = summary_dict[key]
 
