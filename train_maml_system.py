@@ -17,8 +17,8 @@ maybe_unzip_dataset(args=args)
 data = MetaLearningSystemDataLoader
 maml_system = ExperimentBuilder(model=model, data=data, args=args, device=device)
 test_losses = maml_system.run_experiment()
-test_losses['n_iter'] = args.n_steps
-df_results = pd.DataFrame(test_losses)
+test_losses['n_iter'] = args.number_of_evaluation_steps_per_iter
+df_results = pd.DataFrame(test_losses, index=[0])
 output_path = Path(args.output_csv)
 if output_path.exists():
     df_results.to_csv(output_path, mode='a', header=False, index=False)

@@ -7,3 +7,4 @@ pydrive
 Pillow
 tqdm
 torchvision
+pandas
