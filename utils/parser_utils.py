@@ -53,6 +53,7 @@ def get_args():
     parser.add_argument('--num_samples_per_class', type=int, default=1, help='Number of samples per set to sample')
     parser.add_argument('--name_of_args_json_file', type=str, default="None")
     parser.add_argument('--output_csv', type=str, default="output.csv")
+    parser.add_argument('--evaluate_on_test_set_only', type=str, default="false")
     parser.add_argument('--cli_args', nargs='+', default=[])
 
     args = parser.parse_args()
