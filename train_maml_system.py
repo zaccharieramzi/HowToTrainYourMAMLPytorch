@@ -1,3 +1,7 @@
+from pathlib import Path
+
+import pandas as pd
+
 from data import MetaLearningSystemDataLoader
 from experiment_builder import ExperimentBuilder
 from few_shot_learning_system import MAMLFewShotClassifier
@@ -12,4 +16,11 @@ model = MAMLFewShotClassifier(args=args, device=device,
 maybe_unzip_dataset(args=args)
 data = MetaLearningSystemDataLoader
 maml_system = ExperimentBuilder(model=model, data=data, args=args, device=device)
-maml_system.run_experiment()
+test_losses = maml_system.run_experiment()
+test_losses['n_iter'] = args.n_steps
+df_results = pd.DataFrame(test_losses)
+output_path = Path(args.output_csv)
+if output_path.exists():
+    df_results.to_csv(output_path, mode='a', header=False, index=False)
+else:
+    df_results.to_csv(output_path, mode='w', index=False)

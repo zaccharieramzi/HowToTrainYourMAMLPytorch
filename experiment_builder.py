@@ -298,6 +298,7 @@ class ExperimentBuilder(object):
                                                       create=False, filename="test_summary.csv")
         print(test_losses)
         print("saved test performance at", summary_statistics_filepath)
+        return test_losses
 
     def run_experiment(self):
         """
