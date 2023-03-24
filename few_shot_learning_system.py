@@ -236,12 +236,18 @@ class MAMLFewShotClassifier(nn.Module):
                                                                  num_step=num_step)
 
                     task_losses.append(per_step_loss_importance_vectors[num_step] * target_loss)
-                elif num_step == (self.args.number_of_training_steps_per_iter - 1):
+                elif num_step == (self.args.number_of_training_steps_per_iter - 1) and training_phase:
                     target_loss, target_preds = self.net_forward(x=x_target_set_task,
                                                                  y=y_target_set_task, weights=names_weights_copy,
                                                                  backup_running_statistics=False, training=True,
                                                                  num_step=num_step)
                     task_losses.append(target_loss)
+            if not training_phase:
+                target_loss, target_preds = self.net_forward(x=x_target_set_task,
+                                                            y=y_target_set_task, weights=names_weights_copy,
+                                                            backup_running_statistics=False, training=True,
+                                                            num_step=num_steps)
+                task_losses.append(target_loss)
 
             per_task_target_preds[task_id] = target_preds.detach().cpu().numpy()
             _, predicted = torch.max(target_preds.data, 1)
